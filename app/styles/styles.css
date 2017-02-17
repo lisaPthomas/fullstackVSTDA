@@ -1,0 +1,37 @@
+header {
+    text-align: center;
+}
+
+
+/*style the input panel*/
+
+.inputPanel {
+    margin-top: 25px;
+}
+
+.sortButtons {
+    margin-top: 25px;
+}
+
+#todosInput {
+    margin-bottom: 15px;
+}
+
+#selectbasic {
+    margin-bottom: 15px;
+}
+
+
+/* Style the table by priority*/
+
+.cLow {
+    background-color: rgba(46, 160, 189, 0.18);
+}
+
+.bMedium {
+    background-color: rgba(208, 208, 27, 0.33);
+}
+
+.aHigh {
+    background-color: rgba(208, 27, 27, 0.33)
+}

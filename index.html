@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/app/styles/styles.css">
+    <!-- endinject -->
+</head>
+<!-- Put ng-controller in body tag -->
+
+<body ng-controller="TodosController as vm">
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <!--HEADER -->
+    <header>
+        <h1>Very Simple To Do List</h1>
+    </header>
+    <!-- Create Container for inputs and Table -->
+    <div class="container">
+        <!-- create input form with input, selector, and button -->
+        <div class="col-xs-4 inputPanel">
+            <div class="panel panel-info">
+                <div class="panel-heading">Add To Do Item</div>
+                <div class="panel-body">
+                    <label for="todo item ">Add to List</label>
+                    <input ng-model="vm.todoName" id="todosInput" type="text" placeholder="e.g. Get milk " class="form-control input-md">
+                    <label class="control-label " for="selectbasic">Priority</label>
+                    <select id="selectbasic" name="selectbasic " class="form-control input-md " ng-model="vm.todoPriority ">
+                        <option value="aHigh">High</option>
+                        <option value="bMedium">Medium</option>
+                        <option value="cLow">Low</option>
+                    </select>
+                </div>
+                <div class="panel-footer">
+                    <button class="btn btn-success btn-md " ng-click="vm.addTodo(vm.todoName, vm.todoPriority)">Add To Do Item</button>
+                </div>
+            </div>
+        </div>
+        <!-- create set of 3 inline buttons for sorting/bootstrap  -->
+        <!-- Form Name -->
+        <form ng-submit="vm.addTodo()"></form>
+        <div class="col-xs-8 sortButtons">
+            <label for="OrderBy">Order By</label>
+            <div class="input-group-btn">
+                <button type="button " class="btn btn-primary col-xs-4" ng-click="sortBy='priority' ">Highest Priority</button>
+                <button type="button " class="btn btn-primary col-xs-4" ng-click="sortBy = '-priority' ">Lowest Priority</button>
+                <button type="button " class="btn btn-primary col-xs-4" ng-click="sortBy = 'text'; reverse = !reverse">Alphabetically</button>
+            </div>
+            <div>
+                <table class="table">
+                    <thead>
+                        <!-- ng-onclick event and filters -->
+                        <th class="col-xs-9">List Item</th>
+                        <th class="col-xs-1">Actions</th>
+                        <thead>
+                            <tbody>
+                                <tr ng-repeat="data in vm.todos | orderBy : sortBy : reverse" class="{{data.priority}}">
+                                    <td>
+                                        <h4 ng-click="editing = !editing" ng-hide="editing">{{data.text}}</h4>
+                                        <input ng-blur="editing = !editing" ng-show="editing" ng-model="data.text">
+                                        </input>
+                                        <td>
+                                            <button ng-click="vm.updateTodo(data.todoEntryId, data)">Save</button>
+                                        </td>
+                                    </td>
+                                    <!-- <td>{{todo.priority}}</td>
+ -->
+                                    <td><a href="" ng-click="vm.deleteTodo(data.todoEntryId)">delete</a></td>
+                                </tr>
+                            </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- inject:js -->
+    <script src="/app/app.js"></script>
+    <script src="/app/todos.controller.js"></script>
+    <script src="/app/todos.factory.js"></script>
+    <!-- endinject -->
+</body>
+
+</html>
